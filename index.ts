@@ -1,6 +1,7 @@
 import Inventario from './Singleton/inventario.js';
 import EquipoFactory from './Factory Method/factoryDevices.js';
 import { Equipo, Soporte } from './Observer/notifier.js';
+import { AdaptadorInventario, InventarioViejo } from './Adapter/inventarioViejo.js';
 
 // SINGLETON
 const inventario = Inventario.obtenerInstancia();
@@ -20,3 +21,9 @@ const soporte = new Soporte();
 const equipo= new Equipo("Notebook HP", "Portátil", "disponible");
 equipo.agregarObservador(soporte);
 equipo.cambiarEstado("En reparación");
+
+// ADAPTER
+const inventarioViejo = new InventarioViejo();
+const adaptador = new AdaptadorInventario(inventarioViejo);
+adaptador.agregarEquipo("Servidor Dell", "Servidor", "disponible");
+console.log(adaptador.listarEquipos());
